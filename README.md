@@ -39,7 +39,7 @@ yarn add react-animated-waves
 
 ## Usage
 
-To use **React Animated Waves** in your project, import the `Waves` component from the library and use it in your React app. Check out an interactive demo [here](https://codesandbox.io/p/sandbox/react-animated-waves-example-skhlh4).
+To use **React Animated Waves** in your project, import the `Waves` component from the library and use it in your React app. Check out an interactive demo [here](https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh).
 
 ```jsx
 import Waves from "react-animated-waves";
