@@ -22,10 +22,10 @@ jobs:
       #----------------------------------------------
       # Setup Node Environment
       #----------------------------------------------
-      - name: Use Node ${{ matrix.node-version }}
+      - name: Use Node 20.x
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
       #----------------------------------------------
       # Cache modules
@@ -60,10 +60,10 @@ jobs:
       #----------------------------------------------
       # Setup Node Environment
       #----------------------------------------------
-      - name: Use NodeJs 18.x
+      - name: Use NodeJs 20.x
         uses: actions/setup-node@v2
         with:
-          node-version: 18.x
+          node-version: 20.x
  
       #----------------------------------------------
       # Cache modules
