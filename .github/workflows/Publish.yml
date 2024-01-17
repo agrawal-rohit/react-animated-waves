@@ -1,0 +1,116 @@
+name: Publish
+on:
+  push:
+    branches: ["main", "beta"]
+  pull_request:
+    branches: ["main", "beta", "next"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Begin CI
+        uses: actions/checkout@v2
+
+      #----------------------------------------------
+      # Setup Kernel for React Native
+      #----------------------------------------------
+      - name: Setup kernel for react native, increase watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      #----------------------------------------------
+      # Setup Node Environment
+      #----------------------------------------------
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+
+      #----------------------------------------------
+      # Cache modules
+      #----------------------------------------------
+      - name: Use cached node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: nodeModules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            nodeModules-
+
+      #----------------------------------------------
+      # Install Dependencies
+      #----------------------------------------------
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      #----------------------------------------------
+      # Run unit tests
+      #----------------------------------------------
+      - name: Test
+        run: yarn test
+
+  publish:
+    if: ${{github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta')}}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+
+      #----------------------------------------------
+      # Setup Node Environment
+      #----------------------------------------------
+      - name: Use NodeJs 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+ 
+      #----------------------------------------------
+      # Cache modules
+      #----------------------------------------------
+      - name: Use cached node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: nodeModules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            nodeModules-
+
+      #----------------------------------------------
+      # Install dependencies
+      #----------------------------------------------
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      #----------------------------------------------
+      # Run unit tests
+      #----------------------------------------------
+      - name: Test
+        run: yarn test
+
+      #----------------------------------------------
+      # Store coverage
+      #----------------------------------------------
+      - name: Upload coverage to Codacy
+        uses: codacy/codacy-coverage-reporter-action@1.0.0
+        with:
+          # API project token to retrieve your remote Codacy configuration for the project being analyzed
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          # Optional comma separated list of coverage reports to send to Codacy
+          coverage-reports: ./coverage/lcov.info
+
+      #----------------------------------------------
+      # Build dist package
+      #----------------------------------------------
+      - name: Build
+        run: yarn build
+
+      #----------------------------------------------
+      # Publish package
+      #----------------------------------------------
+      - name: Semantic Release
+        run: yarn semantic-release
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+ 

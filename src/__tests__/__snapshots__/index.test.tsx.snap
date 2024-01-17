@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AudioWaves Component renders with custom amplitude 1`] = `
+<div>
+  <canvas
+    height="auto"
+    width="0"
+  />
+</div>
+`;
+
+exports[`AudioWaves Component renders with custom colors 1`] = `
+<div>
+  <canvas
+    height="auto"
+    width="0"
+  />
+</div>
+`;
+
+exports[`AudioWaves Component renders with default props 1`] = `
+<div>
+  <canvas
+    height="auto"
+    width="0"
+  />
+</div>
+`;
+
+exports[`AudioWaves Component renders without crashing 1`] = `
+<div>
+  <canvas
+    height="auto"
+    width="0"
+  />
+</div>
+`;

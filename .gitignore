@@ -1,0 +1,11 @@
+dist/
+node_modules/
+npm-debug.*
+
+# Coverage
+coverage/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
