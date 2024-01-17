@@ -11,6 +11,8 @@
 
 **React Animated Waves** is a React component that generates beautiful animated waves for audio visualizations or UI loading states.
 
+https://github.com/agrawal-rohit/react-animated-waves/assets/29514438/2948ec93-6f38-49f4-bee4-85ad44ddbc49
+
 ## Table of Contents
 
 1. [Installation](#installation)
