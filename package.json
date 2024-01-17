@@ -1,6 +1,6 @@
 {
   "name": "react-animated-waves",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A React component for creating beautiful audio visualizations or UI loading states using animated waves",
   "main": "dist/index.min.js",
   "module": "dist/index.es.js",
