@@ -2,7 +2,7 @@
 
 <div style="display: flex; flex-direction: row">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
-<img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/5e2ee3d7373a47d1b0bd89517941abd3">
+<img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/09220ab3d193472ba76d1ad50f11ee51">
 <img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </div>
