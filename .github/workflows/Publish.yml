@@ -14,12 +14,6 @@ jobs:
         uses: actions/checkout@v2
 
       #----------------------------------------------
-      # Setup Kernel for React Native
-      #----------------------------------------------
-      - name: Setup kernel for react native, increase watchers
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-      #----------------------------------------------
       # Setup Node Environment
       #----------------------------------------------
       - name: Use Node 20.x
