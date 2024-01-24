@@ -1,5 +1,7 @@
 # React Animated Waves
 
+_(Interested in creating your own NPM library? Check out [my NPM library template](https://github.com/agrawal-rohit/npm-library-template) to kickstart your library development with best practices and integrated tools.)_
+
 <div style="display: flex; flex-direction: row">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
 <img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/09220ab3d193472ba76d1ad50f11ee51">
