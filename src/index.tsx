@@ -183,7 +183,7 @@ const Waves: React.FC<WavesProps> = ({
     };
   }, [colors, drawWaveform]);
 
-  // Render the canvas
+  // Render the canvas 
   return (
     <canvas ref={canvasRef} width="100%" height="auto" {...props}></canvas>
   );

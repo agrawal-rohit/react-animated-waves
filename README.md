@@ -1,19 +1,22 @@
-# React Animated Waves
-
-_(Interested in creating your own NPM library? Check out my [NPM library template](https://github.com/agrawal-rohit/npm-library-template) to kickstart your library development with best practices and integrated tools.)_
-
-<div style="display: flex; flex-direction: row">
+<div align="center">
+<h2>React Animated Waves</h2>
+<p align="center" style="width: 80%; margin: auto">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
 <img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/09220ab3d193472ba76d1ad50f11ee51">
 <img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
+</p>
+<br />
+<div align="center" style="width: 80%; margin: auto">
+(Planning to create your own NPM library? Check out my <a href="https://github.com/agrawal-rohit/npm-library-template">NPM library template</a> to kickstart your library development with best practices)
+</div>
 </div>
 
 <br />
 
-**React Animated Waves** is a React component that generates beautiful animated waves for audio visualizations or UI loading states.
+![Aug-24-2024 22-55-33](https://github.com/user-attachments/assets/348b84bf-d2f8-406b-a162-e0a480c9e273)
 
-https://github.com/agrawal-rohit/react-animated-waves/assets/29514438/2948ec93-6f38-49f4-bee4-85ad44ddbc49
+A lightweight and customizable React component that creates stunning animated wave effects. Perfect for enhancing audio visualizations, adding dynamic loading states, or creating eye-catching UI elements in your React apps.
 
 ## Table of Contents
 
@@ -41,7 +44,7 @@ yarn add react-animated-waves
 
 ## Usage
 
-To use **React Animated Waves** in your project, import the `Waves` component from the library and use it in your React app. Check out an interactive demo [here](https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh).
+Import the `Waves` component from the library and use it in your React app. Check out an interactive demo [here](https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh).
 
 ```jsx
 import Waves from "react-animated-waves";

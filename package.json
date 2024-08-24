@@ -5,6 +5,12 @@
   "main": "dist/index.min.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "keywords": [
+    "reactjs",
+    "audio-visualization",
+    "loader-animation",
+    "animated-wave"
+  ],
   "files": [
     "dist"
   ],
