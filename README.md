@@ -6,7 +6,6 @@
 <img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </p>
-<br />
 <div align="center" style="width: 80%; margin: auto">
 (Planning to create your own NPM library? Check out my <a href="https://github.com/agrawal-rohit/npm-library-template">NPM library template</a> to kickstart your library development with best practices)
 </div>
