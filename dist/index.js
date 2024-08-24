@@ -160,7 +160,7 @@ var Waves = function (_a) {
             cancelAnimationFrame(animationFrameId);
         };
     }, [colors, drawWaveform]);
-    // Render the canvas
+    // Render the canvas 
     return (React.createElement("canvas", __assign({ ref: canvasRef, width: "100%", height: "auto" }, props)));
 };
 // Export the memoized version of the component to avoid unnecessary re-renders
