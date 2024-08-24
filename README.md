@@ -6,12 +6,12 @@
 <img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </p>
-<div align="center" style="width: 80%; margin: auto">
+<sup align="center" style="width: 80%; margin: auto; font-size: 0.1rem !important;">
 (Planning to create your own NPM library? Check out my <a href="https://github.com/agrawal-rohit/npm-library-template">NPM library template</a> to kickstart your library development with best practices)
-</div>
+</sup>
 </div>
 
-<br />
+<br /><br />
 
 ![Aug-24-2024 22-55-33](https://github.com/user-attachments/assets/348b84bf-d2f8-406b-a162-e0a480c9e273)
 
