@@ -8,11 +8,11 @@
 </p>
 </div>
 
-<br /><br />
+<br />
 
-![Aug-24-2024 22-55-33](https://github.com/user-attachments/assets/348b84bf-d2f8-406b-a162-e0a480c9e273)
+![Aug-24-2024 22-55-33](https://cdn.rohit.build/work%3Areact-animated-waves%3Avoice-demo.gif)
 
-A lightweight and customizable React component that creates stunning animated wave effects. Perfect for enhancing audio visualizations, adding dynamic loading states, or creating eye-catching UI elements in your React apps.
+A canvas-based component built with React for creating fluid animated waves _(ideally used in audio visualizations, voice UIs, progress loaders, etc.)_.
 
 ## Table of Contents
 
@@ -24,18 +24,10 @@ A lightweight and customizable React component that creates stunning animated wa
 
 ## Installation
 
-**React Animated Waves** can be installed using either npm or yarn:
-
-**Using npm:**
+The easiest way to get the latest version of `react-animated-waves` is to install it via npm, yarn or pnpm:
 
 ```bash
-npm install --save react-animated-waves
-```
-
-**Using yarn:**
-
-```bash
-yarn add react-animated-waves
+npm install react-animated-waves
 ```
 
 ## Usage
@@ -59,7 +51,7 @@ The `Waves` component accepts the following props:
 
 ## Contributing
 
-All contributions from the community are welcome. Please read the [contributing guide](CONTRIBUTING.md) for more information.
+Contributions are welcome. Please read the [contributing guide](CONTRIBUTING.md) for more information.
 
 ## License
 
