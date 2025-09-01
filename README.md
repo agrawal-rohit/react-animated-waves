@@ -10,11 +10,12 @@
 </p>
 
 [Installation](#installation) • [Usage](#usage) • [Props](#props) • [Contributing](#contributing) • [License](#license)
-</div>
 
 <br />
 
 ![Aug-24-2024 22-55-33](https://cdn.rohit.build/github-gifs%3Areact-animated-waves.gif)
+
+</div>
 
 A canvas-based component built with React for creating fluid animated waves _(ideally used in audio visualizations, voice UIs, progress loaders, etc.)_.
 
