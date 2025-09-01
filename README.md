@@ -1,6 +1,6 @@
 <div align="center">
   
-# React Animated Waves
+## React Animated Waves
 
 <p align="center" style="width: 80%; margin: auto">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
