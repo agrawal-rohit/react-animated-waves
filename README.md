@@ -1,11 +1,15 @@
 <div align="center">
-<h2>React Animated Waves</h2>
+  
+# React Animated Waves
+
 <p align="center" style="width: 80%; margin: auto">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
 <img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/09220ab3d193472ba76d1ad50f11ee51">
 <img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </p>
+
+[Installation](#installation) • [Usage](#usage) • [Props](#props) • [Contributing](#contributing) • [License](#license)
 </div>
 
 <br />
@@ -13,14 +17,6 @@
 ![Aug-24-2024 22-55-33](https://cdn.rohit.build/work%3Areact-animated-waves%3Avoice-demo.gif)
 
 A canvas-based component built with React for creating fluid animated waves _(ideally used in audio visualizations, voice UIs, progress loaders, etc.)_.
-
-## Table of Contents
-
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Props](#props)
-4. [Contributing](#contributing)
-5. [License](#license)
 
 ## Installation
 
