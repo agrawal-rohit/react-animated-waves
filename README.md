@@ -14,7 +14,7 @@
 
 <br />
 
-![Aug-24-2024 22-55-33](https://cdn.rohit.build/work%3Areact-animated-waves%3Avoice-demo.gif)
+![Aug-24-2024 22-55-33](https://cdn.rohit.build/github-gifs%3Areact-animated-waves.gif)
 
 A canvas-based component built with React for creating fluid animated waves _(ideally used in audio visualizations, voice UIs, progress loaders, etc.)_.
 
