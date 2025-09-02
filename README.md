@@ -9,7 +9,7 @@
 <img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </p>
 
-[Installation](#installation) • [Usage](#usage) • [Props](#props) • [Contributing](#contributing) • [License](#license)
+[Installation](#installation) • [Demo](https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh) • [Usage](#usage) • [Props](#props) • [Contributing](#contributing) • [License](#license)
 
 <br />
 
