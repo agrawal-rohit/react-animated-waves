@@ -1,6 +1,6 @@
 {
   "name": "react-animated-waves",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React component for creating beautiful audio visualizations or UI loading states using animated waves",
   "main": "dist/index.min.js",
   "module": "dist/index.es.js",
@@ -18,7 +18,6 @@
   "repository": "https://github.com/agrawal-rohit/react-animated-waves.git",
   "homepage": "https://github.com/agrawal-rohit/react-animated-waves.git",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "cz": "git-cz",
     "test": "jest --coverage",
@@ -113,5 +112,6 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ]
-  }
+  },
+  "packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538"
 }
