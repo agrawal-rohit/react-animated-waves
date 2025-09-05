@@ -5,10 +5,9 @@
 <p align="center" style="width: 80%; margin: auto">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/Publish.yml">
 <img alt="Codacy coverage" src="https://img.shields.io/codacy/coverage/09220ab3d193472ba76d1ad50f11ee51">
-<img alt="NPM Version" src="https://img.shields.io/npm/v/react-animated-waves">
+<img alt="NPM downloads" src="https://img.shields.io/npm/dw/react-animated-waves">
+<img alt="NPM version" src="https://img.shields.io/npm/v/react-animated-waves">
 <img alt="NPM bundle size" src="https://img.shields.io/bundlephobia/min/react-animated-waves">
-<img alt="npm" src="https://img.shields.io/npm/dw/react-animated-waves">
-<img alt="Licence" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves">
 </p>
 
 [Installation](#installation) • [Demo](https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh) • [Usage](#usage) • [Props](#props) • [Contributing](#contributing) • [License](#license)
