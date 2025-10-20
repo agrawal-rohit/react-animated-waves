@@ -14,7 +14,7 @@
 
 <br />
 
-![Aug-24-2024 22-55-33](https://cdn.rohit.build/github-gifs/react-animated-waves.gif)
+![Aug-24-2024 22-55-33](https://cdn.rohit.build/oss/react-animated-waves/github-readme-preview.gif)
 
 </div>
 
