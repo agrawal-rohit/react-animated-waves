@@ -176,6 +176,6 @@ jobs:
           git commit -m "chore(release): bump version to ${{ needs.npm_release.outputs.version }} [skip ci]"
           git push origin --delete update-version-${{ needs.npm_release.outputs.version }} || true
           git push origin update-version-${{ needs.npm_release.outputs.version }}
-          gh pr create --title "chore(release): bump version to ${{ needs.npm_release.outputs.version }} [skip ci]" --body "This automated pull request updates the version numbers in \`package.json\` and \`sonar-project.properties\` to reflect the latest release.\n\nChanges:\n- Updated version in package.json\n- Updated sonar.projectVersion in sonar-project.properties\n\nThis PR was created automatically after publishing the release." --base main --head update-version-${{ needs.npm_release.outputs.version }}
+          gh pr create --title "chore(release): bump version to ${{ needs.npm_release.outputs.version }} [skip ci]" --body "This automated pull request updates the version numbers in \`package.json\` and \`sonar-project.properties\` to reflect the latest release." --base main --head update-version-${{ needs.npm_release.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
