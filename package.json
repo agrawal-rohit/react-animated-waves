@@ -26,7 +26,8 @@
 		"typecheck": "tsc --noEmit",
 		"lint": "pnpm exec biome lint --write",
 		"format": "pnpm exec biome format --write",
-		"check": "pnpm run typecheck && pnpm exec biome check --write"
+		"check": "pnpm run typecheck && pnpm exec biome check --write",
+		"check:ci": "pnpm run typecheck && pnpm exec biome check"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.17",
