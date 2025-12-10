@@ -13,6 +13,8 @@
 
 [Installation](#installation) • [Demo](#demo) • [Usage](#usage) • [Contributing](#contributing) • [License](#license)
 
+<br />
+
 <img src="https://cdn.rohit.build/oss/react-animated-waves/github-readme-preview.gif" alt="Preview" style="width: 80%; margin: auto" />
 
 </div>
