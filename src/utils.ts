@@ -39,11 +39,11 @@ export const lerp = (a: number, b: number, t: number): number => {
  * hexToRgba('#ff0000', 0.5); // returns "rgba(255, 0, 0, 0.5)"
  */
 export const hexToRgba = (hex: string, alpha: number = 1): string => {
-	if (hex[0] === "#") {
+	if (hex.startsWith("#")) {
 		hex = hex.slice(1);
 	}
 
-	const bigint = parseInt(hex, 16);
+	const bigint = Number.parseInt(hex, 16);
 	const r = (bigint >> 16) & 255;
 	const g = (bigint >> 8) & 255;
 	const b = bigint & 255;
