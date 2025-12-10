@@ -1,31 +1,10 @@
 @import "tailwindcss";
 
+/* Theme configuration */
+@theme {
+  --font-sans: "Geist Sans", system-ui, sans-serif;
+}
+
 :root {
-	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
-
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-body {
-	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
+    @apply bg-white text-zinc-600 tracking-tight antialiased dark:bg-zinc-900 dark:text-zinc-300 font-normal leading-relaxed;
 }

@@ -35,6 +35,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.3",
+		"@fontsource/geist-sans": "^5.2.5",
 		"@stryker-mutator/core": "^9.4.0",
 		"@stryker-mutator/typescript-checker": "^9.4.0",
 		"@stryker-mutator/vitest-runner": "^9.4.0",
