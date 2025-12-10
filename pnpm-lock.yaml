@@ -11,6 +11,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.2)(esbuild@0.25.12)(jiti@2.6.1)(yaml@2.8.2))
+      react:
+        specifier: ^19.1.0
+        version: 19.2.1
+      react-dom:
+        specifier: ^19.1.0
+        version: 19.2.1(react@19.2.1)
       tailwindcss:
         specifier: ^4.1.17
         version: 4.1.17
@@ -69,12 +75,6 @@ importers:
       lint-staged:
         specifier: ^16.1.6
         version: 16.2.7
-      react:
-        specifier: ^19.1.0
-        version: 19.2.1
-      react-dom:
-        specifier: ^19.1.0
-        version: 19.2.1(react@19.2.1)
       tsdown:
         specifier: ^0.11.9
         version: 0.11.13(typescript@5.9.3)
