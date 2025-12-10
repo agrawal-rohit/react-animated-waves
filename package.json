@@ -1,6 +1,6 @@
 {
 	"name": "react-animated-waves",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"type": "module",
 	"private": false,
 	"packageManager": "pnpm@9.7.0",
@@ -34,8 +34,8 @@
 		"tailwindcss": "^4.1.17"
 	},
 	"peerDependencies": {
-	  "react": "^19.1.0",
-	  "react-dom": "^19.1.0"
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.3",
