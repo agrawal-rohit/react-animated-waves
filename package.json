@@ -1,6 +1,6 @@
 {
 	"name": "react-animated-waves",
-	"version": "0.0.0",
+	"version": "1.0.4",
 	"type": "module",
 	"private": false,
 	"packageManager": "pnpm@9.7.0",
