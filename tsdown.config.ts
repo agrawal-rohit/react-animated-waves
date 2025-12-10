@@ -3,7 +3,10 @@ import { defineConfig } from "tsdown";
 export default defineConfig([
 	{
 		entry: ["./src/index.ts"],
-		platform: "neutral",
+		platform: "browser",
+		external: ["react", "react/jsx-runtime"],
+		minify: true,
+    sourcemap: true,
 		dts: true,
 	},
 ]);

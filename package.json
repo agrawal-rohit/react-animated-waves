@@ -33,6 +33,10 @@
 		"@tailwindcss/vite": "^4.1.17",
 		"tailwindcss": "^4.1.17"
 	},
+	"peerDependencies": {
+	  "react": "^19.1.0",
+	  "react-dom": "^19.1.0"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.3",
 		"@commitlint/cli": "^19.8.1",
@@ -52,8 +56,6 @@
 		"happy-dom": "^20.0.11",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.6",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
 		"tsdown": "^0.11.9",
 		"typescript": "^5.9.2",
 		"vite": "npm:rolldown-vite@latest",

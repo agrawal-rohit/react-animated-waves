@@ -8,7 +8,6 @@
     <img alt="Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/ci.yml">
     <img alt="Sonar Coverage" src="https://img.shields.io/sonar/coverage/agrawal-rohit_react-animated-waves?server=https%3A%2F%2Fsonarcloud.io">
     <img alt="Downloads" src="https://img.shields.io/npm/dt/react-animated-waves">
-    <img alt="NPM bundle size" src="https://img.shields.io/bundlephobia/min/react-animated-waves">
     <img alt="License" src="https://img.shields.io/github/license/agrawal-rohit/react-animated-waves" />
   </p>
 
@@ -39,7 +38,7 @@ Check out an interactive demo [here](https://codesandbox.io/p/sandbox/react-anim
 Import the `Waves` component from `react-animated-waves` and use it in your React app as follows:
 
 ```jsx
-import Waves from "react-animated-waves";
+import { Waves } from "react-animated-waves";
 
 <Waves amplitude={20} colors={["#FF6AC6", "#436EDB", "#FF6AC6"]} />;
 ```
