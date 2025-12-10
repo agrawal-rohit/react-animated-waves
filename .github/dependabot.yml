@@ -1,12 +1,69 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    target-branch: "next"
+  # Keep GitHub Actions current on main (trunk)
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: main
     schedule:
-      interval: "daily"
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Kolkata
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "ci"
+      include: scope
+
+  # pnpm dependency updates flow into main (trunk)
+  - package-ecosystem: npm
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Kolkata
+    versioning-strategy: increase
+    rebase-strategy: auto
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - node
+      - pnpm
+    commit-message:
+      prefix: "fix" # for production/runtime deps
+      prefix-development: "chore" # for dev-only deps
+      include: scope
+    groups:
+      runtime-deps:
+        dependency-type: production
+      dev-deps:
+        dependency-type: development
+      typescript:
+        patterns:
+          - "typescript"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      commitlint-husky:
+        patterns:
+          - "@commitlint/*"
+          - "husky"
+          - "lint-staged"
+      git-cliff:
+        patterns:
+          - "git-cliff"
+      biome:
+        patterns:
+          - "@biomejs/*"
+      types:
+        patterns:
+          - "@types/*"
+    ignore:
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"

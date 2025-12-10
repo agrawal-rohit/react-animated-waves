@@ -1,9 +1,8 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[REQUEST]"
+title: ""
 labels: enhancement
-assignees: agrawal-rohit
 ---
 
 **Is your feature request related to a problem? Please describe.**

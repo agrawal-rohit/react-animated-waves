@@ -1,3 +1,7 @@
+*.tgz
+.vscode
+
+# Build & Dependencies
 dist/
 node_modules/
 npm-debug.*
@@ -9,3 +13,7 @@ coverage/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Stryker mutation testing files
+.stryker-tmp
+reports/

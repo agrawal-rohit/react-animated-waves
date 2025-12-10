@@ -1,39 +1,22 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "declaration": true,
-    "declarationDir": "dist",
-    "declarationMap": true,
-    "downlevelIteration": false,
-    "outDir": "dist",
-    "sourceMap": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowJs": false,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "jsx": "react",
-    "baseUrl": "./src",
-    "paths": {
-      "tslib": ["node_modules/tslib/tslib.d.ts"]
-    },
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
-  },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/__tests__",
-    "**/*.test.tsx",
-    "**/*.spec.tsx"
-  ]
+	"compilerOptions": {
+		"target": "esnext",
+		"jsx": "react-jsx",
+		"lib": ["es2023", "dom"],
+		"moduleDetection": "force",
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"types": ["node"],
+		"strict": true,
+		"noUnusedLocals": true,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
 }

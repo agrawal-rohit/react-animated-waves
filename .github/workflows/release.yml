@@ -1,0 +1,180 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  npm_release:
+    name: NPM Release
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    outputs:
+      tag: ${{ steps.parse.outputs.tag }}
+      version: ${{ steps.parse.outputs.version }}
+      prerelease: ${{ steps.parse.outputs.prerelease }}
+      npm_tag: ${{ steps.parse.outputs.npm_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Update npm for Trusted Publishing
+        run: npm install -g npm@latest
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Parse version and release type
+        id: parse
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          # Determine if this is a prerelease and what kind
+          if [[ "$VERSION" =~ -rc\. ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "npm_tag=rc" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" =~ -beta\. ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "npm_tag=beta" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" =~ -alpha\. ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "npm_tag=alpha" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+            echo "npm_tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Sync version in package.json
+        run: |
+          npm version --no-git-tag-version "${{ steps.parse.outputs.version }}"
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish to npm
+        run: |
+          pnpm publish --access public --no-git-checks --tag ${{ steps.parse.outputs.npm_tag }}
+
+  github-release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    needs: npm_release
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate release notes
+        run: |
+          pnpm exec git-cliff --latest --strip all --tag ${{ needs.npm_release.outputs.tag }} --output RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.npm_release.outputs.tag }}
+          name: ${{ needs.npm_release.outputs.tag }}
+          body_path: RELEASE_NOTES.md
+          prerelease: ${{ needs.npm_release.outputs.prerelease }}
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  post-release-updates:
+    name: Post-release Updates
+    runs-on: ubuntu-latest
+    needs:
+      - npm_release
+      - github-release
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync version in package.json
+        run: |
+          npm version --no-git-tag-version "${{ needs.npm_release.outputs.version }}"
+
+      - name: Update SonarQube properties
+        run: |
+          sed -i "s/sonar.projectVersion=.*/sonar.projectVersion=${{ needs.npm_release.outputs.version }}/" sonar-project.properties
+
+      - name: Create version bump PR
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b update-version-${{ needs.npm_release.outputs.version }}
+          git add package.json sonar-project.properties
+          git commit -m "chore: bump version to ${{ needs.npm_release.outputs.version }}"
+          git push origin update-version-${{ needs.npm_release.outputs.version }}
+          gh pr create --title "chore: bump version to ${{ needs.npm_release.outputs.version }}" --body "Automated version bump after release." --base main --head update-version-${{ needs.npm_release.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
