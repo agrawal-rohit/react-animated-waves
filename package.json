@@ -30,8 +30,8 @@
 		"check:ci": "pnpm run typecheck && pnpm exec biome check"
 	},
 	"dependencies": {
-		"@tailwindcss/vite": "^4.1.17",
-		"tailwindcss": "^4.1.17"
+		"@tailwindcss/vite": "^4.1.18",
+		"tailwindcss": "^4.1.18"
 	},
 	"peerDependencies": {
 		"react": "^19.1.0",
