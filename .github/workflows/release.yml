@@ -134,7 +134,7 @@ jobs:
           pnpm exec git-cliff --latest --strip all --tag ${{ needs.npm_release.outputs.tag }} --output RELEASE_NOTES.md
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.npm_release.outputs.tag }}
           name: ${{ needs.npm_release.outputs.tag }}
