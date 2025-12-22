@@ -62,7 +62,8 @@ export const Waves = memo<WavesProps>(
 			if (parent) canvas.width = parent.clientWidth;
 
 			const animate = () => {
-				const time = Date.now() * 0.0015; // Convert milliseconds to seconds and increase speed
+				// Convert milliseconds to seconds and increase speed
+				const time = Date.now() * 0.0015;
 
 				amplitudeRef.current = lerp(
 					amplitudeRef.current,
@@ -163,7 +164,6 @@ export const Waves = memo<WavesProps>(
 			};
 		}, [colors, drawWaveform]);
 
-		// Render the canvas
 		return (
 			<canvas ref={canvasRef} width="100%" height="auto" {...props}></canvas>
 		);
