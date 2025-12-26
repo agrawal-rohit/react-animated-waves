@@ -4,7 +4,7 @@
 
 <div align="center">
   <p align="center" style="width: 80%; margin: auto">
-    <a href="https://github.com/agrawal-rohit/grimoire"><img alt="Made with Grimoire" src="https://img.shields.io/badge/made_with-grimoire-7452A3"></a>
+    <a href="https://github.com/agrawal-rohit/yehle"><img alt="Made with Yehle" src="https://img.shields.io/badge/made_with-yehle-bf693b"></a>
     <img alt="Status" src="https://img.shields.io/github/actions/workflow/status/agrawal-rohit/react-animated-waves/ci.yml">
     <img alt="Sonar Coverage" src="https://img.shields.io/sonar/coverage/agrawal-rohit_react-animated-waves?server=https%3A%2F%2Fsonarcloud.io">
     <img alt="Downloads" src="https://img.shields.io/npm/dt/react-animated-waves">
