@@ -1,5 +1,6 @@
 {
 	"name": "react-animated-waves",
+	"description": "Canvas-based animated waves for ReactJS",
 	"version": "1.0.8",
 	"type": "module",
 	"private": false,
