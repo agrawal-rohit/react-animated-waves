@@ -1,7 +1,7 @@
 {
 	"name": "react-animated-waves",
 	"description": "Canvas-based animated waves for ReactJS",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"type": "module",
 	"private": false,
 	"packageManager": "pnpm@9.7.0",
@@ -57,7 +57,7 @@
 		"happy-dom": "^20.0.11",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.6",
-		"tsdown": "^0.18.2",
+		"tsdown": "^0.18.3",
 		"typescript": "^5.9.2",
 		"vite": "^7.3.0",
 		"vitest": "^4.0.16"
