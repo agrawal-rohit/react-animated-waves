@@ -48,18 +48,18 @@
 		"@stryker-mutator/vitest-runner": "^9.4.0",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.3.1",
-		"@types/node": "^25.0.6",
+		"@types/node": "^25.0.9",
 		"@types/react": "^19.2.8",
 		"@types/react-dom": "^19.1.4",
 		"@vitejs/plugin-react": "^5.1.2",
-		"@vitest/coverage-v8": "4.0.16",
+		"@vitest/coverage-v8": "4.0.17",
 		"git-cliff": "^2.11.0",
-		"happy-dom": "^20.1.0",
+		"happy-dom": "^20.3.3",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.6",
 		"tsdown": "^0.19.0",
 		"typescript": "^5.9.2",
 		"vite": "^7.3.1",
-		"vitest": "^4.0.16"
+		"vitest": "^4.0.17"
 	}
 }
