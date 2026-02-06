@@ -15,7 +15,7 @@
 
 <br />
 
-<img src="https://cdn.rohit-agrawal.com/oss/react-animated-waves/github-readme-preview.gif" alt="Preview" style="width: 80%; margin: auto" />
+<img src="https://cdn.rohit-agrawal.com/work/react-animated-waves/github-readme-preview.gif" alt="Preview" style="width: 80%; margin: auto" />
 
 </div>
 
