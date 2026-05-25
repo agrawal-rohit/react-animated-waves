@@ -14,9 +14,9 @@ jobs:
   assign:
     name: Assign repository owner
     runs-on: ubuntu-latest
-    if: github.event.issue.assignees[0] == null && github.event.pull_request.assignees[0] == null
     steps:
       - uses: pozil/auto-assign-issue@v2
         with:
           assignees: ${{ github.repository_owner }}
           numOfAssignee: 1
+          abortIfPreviousAssignees: true
