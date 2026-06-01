@@ -15,7 +15,7 @@ jobs:
     name: Assign repository owner
     runs-on: ubuntu-latest
     steps:
-      - uses: pozil/auto-assign-issue@v2
+      - uses: pozil/auto-assign-issue@v3
         with:
           assignees: ${{ github.repository_owner }}
           numOfAssignee: 1
