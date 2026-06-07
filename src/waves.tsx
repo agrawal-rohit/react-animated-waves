@@ -1,171 +1,234 @@
-import { memo, useCallback, useEffect, useRef } from "react";
-import { hexToRgba, lerp } from "./utils";
+import {
+	forwardRef,
+	memo,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useLayoutEffect,
+	useMemo,
+	useRef,
+} from "react";
+import { applyCanvasLayout, drawWaveLayers } from "./canvas";
+import type { GradientCache } from "./color";
+import {
+	clampIntensity,
+	DEFAULT_AMPLITUDE,
+	DEFAULT_COLORS,
+	resolveWaveConfig,
+} from "./config";
+import type { WavesProps } from "./types";
 
-// Define the properties for the AnimatedWaveform component
-type WavesProps = React.DetailedHTMLProps<
-	React.CanvasHTMLAttributes<HTMLCanvasElement>,
-	HTMLCanvasElement
-> & {
-	/** The colors for the waveform */
-	colors?: string[];
-	/** The amplitude of the waveform */
-	amplitude?: number;
-};
-
-export const Waves = memo<WavesProps>(
-	({ amplitude = 20, colors = ["#436EDB"], ...props }) => {
-		const amplitudeRef = useRef(amplitude);
+/** Canvas-based animated wave renderer. */
+const WavesComponent = forwardRef<HTMLCanvasElement, WavesProps>(
+	(
+		{
+			amplitude = DEFAULT_AMPLITUDE,
+			colors = DEFAULT_COLORS,
+			speed,
+			smoothing,
+			frequency,
+			waveCount,
+			lineCount,
+			pinch,
+			opacity,
+			amplitudeOscillation,
+			height,
+			pixelRatio = "auto",
+			respectReducedMotion = true,
+			paused = false,
+			intensity,
+			layers,
+			...props
+		},
+		ref,
+	) => {
 		const canvasRef = useRef<HTMLCanvasElement>(null);
-		const targetAmplitudeRef = useRef<number>(amplitude);
+		const amplitudeRef = useRef(amplitude);
+		const targetAmplitudeRef = useRef(amplitude);
+		const gradientCacheRef = useRef<GradientCache>(new Map());
+		const layoutSizeRef = useRef({ width: 300, height: 150 });
+		const renderFrameRef = useRef<(() => void) | null>(null);
 
-		// Update the target amplitude whenever the amplitude prop changes
-		useEffect(() => {
-			targetAmplitudeRef.current = amplitude;
-		}, [amplitude]);
-
-		// Function to draw the waveform on the canvas
-		const drawWaveform = useCallback(
-			(
-				ctx: CanvasRenderingContext2D,
-				amplitude: number,
-				frequency: number,
-				color: string | CanvasGradient,
-				phase = 0,
-			) => {
-				ctx.strokeStyle = color;
-				ctx.beginPath();
-
-				// Draw the waveform
-				for (let i = 0; i < ctx.canvas.width; i++) {
-					// Compute the pinching effect
-					const sineWave = Math.sin(Math.PI * (i / ctx.canvas.width));
-					const pinch = sineWave ** 6;
-
-					// Calculate the y position with sine function, pinch effect, and time-based phase shift
-					const y = amplitude * Math.sin(frequency * i + phase) * pinch;
-
-					ctx.lineTo(i, ctx.canvas.height / 2 + y);
-				}
-
-				ctx.stroke();
-			},
-			[],
+		const waveConfig = useMemo(
+			() =>
+				resolveWaveConfig({
+					speed,
+					smoothing,
+					frequency,
+					waveCount,
+					lineCount,
+					pinch,
+					opacity,
+					amplitudeOscillation,
+					layers,
+				}),
+			[
+				speed,
+				smoothing,
+				frequency,
+				waveCount,
+				lineCount,
+				pinch,
+				opacity,
+				amplitudeOscillation,
+				layers,
+			],
 		);
 
-		// Animate the waveform
+		const intensityMultiplier = clampIntensity(intensity);
+
+		// Expose the canvas element to the parent component.
+		useImperativeHandle(ref, () => canvasRef.current as HTMLCanvasElement, []);
+
+		// Update the target amplitude based on the intensity.
 		useEffect(() => {
-			let animationFrameId: number;
-			const canvas = canvasRef.current as HTMLCanvasElement;
-			const ctx = canvas.getContext("2d");
-			if (!ctx) return;
-			const parent = canvas.parentElement;
-			if (parent) canvas.width = parent.clientWidth;
+			targetAmplitudeRef.current = amplitude * intensityMultiplier;
+		}, [amplitude, intensityMultiplier]);
 
-			const animate = () => {
-				// Convert milliseconds to seconds and increase speed
-				const time = Date.now() * 0.0015;
+		// Apply the canvas layout and update the layout size reference.
+		const resizeCanvas = useCallback(() => {
+			const layout = applyCanvasLayout(canvasRef.current, height, pixelRatio);
+			if (layout) layoutSizeRef.current = layout;
+		}, [height, pixelRatio]);
 
-				amplitudeRef.current = lerp(
-					amplitudeRef.current,
-					targetAmplitudeRef.current,
-					0.1,
+		// Resize the canvas when the layout size changes.
+		useLayoutEffect(() => {
+			resizeCanvas();
+
+			// If the parent element is not found or the ResizeObserver is not available, render the frame.
+			const canvas = canvasRef.current;
+			const parent = canvas?.parentElement;
+			if (!parent || typeof ResizeObserver === "undefined") {
+				renderFrameRef.current?.();
+				return;
+			}
+
+			// Create a new ResizeObserver to resize the canvas when the parent element changes size.
+			const observer = new ResizeObserver(() => {
+				resizeCanvas();
+				renderFrameRef.current?.();
+			});
+
+			observer.observe(parent);
+			return () => observer.disconnect();
+		}, [resizeCanvas]);
+
+		// Render the frame when the canvas is resized.
+		useEffect(() => {
+			let animationFrameId = 0;
+
+			const canvas = canvasRef.current;
+			const ctx = canvas?.getContext("2d");
+			if (!canvas || !ctx) return;
+
+			gradientCacheRef.current.clear();
+
+			// Determine if the animation should run based on the paused state, document visibility, and reduced motion query.
+			const reducedMotionQuery =
+				globalThis.window !== undefined && respectReducedMotion
+					? globalThis.window.matchMedia("(prefers-reduced-motion: reduce)")
+					: null;
+
+			const shouldAnimate = () => {
+				if (paused) return false;
+				if (typeof document !== "undefined" && document.hidden) return false;
+				if (reducedMotionQuery?.matches) return false;
+				return true;
+			};
+
+			const renderFrame = () => {
+				const timestamp = Date.now();
+				const time = timestamp * waveConfig.timeScale;
+
+				// Smoothly approach the latest target amplitude from props/intensity.
+				amplitudeRef.current +=
+					waveConfig.smoothing *
+					(targetAmplitudeRef.current - amplitudeRef.current);
+
+				// Calculate the oscillating amplitude based on the time and the amplitude oscillation configuration.
+				const oscillatingAmplitude =
+					waveConfig.amplitudeOscillation === 0
+						? amplitudeRef.current
+						: amplitudeRef.current *
+							(1 + Math.sin(time) * waveConfig.amplitudeOscillation);
+
+				ctx.clearRect(
+					0,
+					0,
+					layoutSizeRef.current.width,
+					layoutSizeRef.current.height,
 				);
 
-				// Create an oscillating effect with amplitude
-				const oscillatingAmplitude =
-					amplitudeRef.current * (1 + Math.sin(time) * 0.05);
+				drawWaveLayers({
+					ctx,
+					colors,
+					config: waveConfig,
+					gradientCache: gradientCacheRef.current,
+					layoutWidth: layoutSizeRef.current.width,
+					layoutHeight: layoutSizeRef.current.height,
+					oscillatingAmplitude,
+					timestamp,
+				});
+			};
 
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
+			const animate = () => {
+				if (!shouldAnimate()) return;
 
-				// Define primary waveforms with their respective amplitudes, frequencies, and colors
-				const primaryWaveforms = [
-					{
-						amplitude: oscillatingAmplitude,
-						frequency: 0.02,
-						alpha: 0.6,
-						speed: 0.001,
-					},
-					{
-						amplitude: oscillatingAmplitude * 0.6,
-						frequency: 0.03,
-						alpha: 0.4,
-						speed: 0.004,
-					},
-					{
-						amplitude: oscillatingAmplitude * 0.3,
-						frequency: 0.04,
-						alpha: 0.2,
-						speed: 0.007,
-					},
-				];
-
-				// For each primary waveform, draw the waveform and its surrounding mesh
-				for (const primary of primaryWaveforms) {
-					const gradient = ctx.createLinearGradient(
-						0,
-						0,
-						canvas.width,
-						canvas.height,
-					);
-					const stopIncrement = colors.length > 1 ? 1 / (colors.length - 1) : 0;
-					colors.forEach((color, index) => {
-						gradient.addColorStop(
-							stopIncrement * index,
-							hexToRgba(color, primary.alpha),
-						);
-					});
-
-					drawWaveform(
-						ctx,
-						primary.amplitude,
-						primary.frequency,
-						gradient,
-						Date.now() * primary.speed,
-					);
-
-					// Draw secondary waveforms around the primary waveform
-					for (let i = 0; i < 30; i++) {
-						const amp = primary.amplitude - i * 0.1;
-						const freq = primary.frequency + i * 0.00025;
-						const alpha = primary.alpha * 0.6 - i * 0.01;
-						const gradient = ctx.createLinearGradient(
-							0,
-							0,
-							canvas.width,
-							canvas.height,
-						);
-						const stopIncrement =
-							colors.length > 1 ? 1 / (colors.length - 1) : 0;
-						colors.forEach((color, index) => {
-							gradient.addColorStop(
-								stopIncrement * index,
-								hexToRgba(color, alpha),
-							);
-						});
-
-						drawWaveform(
-							ctx,
-							amp,
-							freq,
-							gradient,
-							Date.now() * primary.speed + i * 0.015,
-						);
-					}
-				}
-
+				renderFrame();
 				animationFrameId = requestAnimationFrame(animate);
 			};
 
-			animate();
+			// Set the render frame reference to the render frame function.
+			renderFrameRef.current = renderFrame;
+			resizeCanvas();
+			renderFrame();
 
-			// Clean up the animation frame when the component unmounts
-			return () => {
-				cancelAnimationFrame(animationFrameId);
+			// Start the animation if the animation should run.
+			if (shouldAnimate()) animationFrameId = requestAnimationFrame(animate);
+
+			const handleVisibilityChange = () => {
+				if (!document.hidden && shouldAnimate()) {
+					renderFrame();
+					animationFrameId = requestAnimationFrame(animate);
+				}
 			};
-		}, [colors, drawWaveform]);
+
+			const handleReducedMotionChange = () => {
+				if (shouldAnimate()) {
+					renderFrame();
+					animationFrameId = requestAnimationFrame(animate);
+				}
+			};
+
+			document.addEventListener("visibilitychange", handleVisibilityChange);
+			reducedMotionQuery?.addEventListener("change", handleReducedMotionChange);
+
+			return () => {
+				renderFrameRef.current = null;
+				cancelAnimationFrame(animationFrameId);
+				document.removeEventListener(
+					"visibilitychange",
+					handleVisibilityChange,
+				);
+				reducedMotionQuery?.removeEventListener(
+					"change",
+					handleReducedMotionChange,
+				);
+			};
+		}, [colors, paused, respectReducedMotion, resizeCanvas, waveConfig]);
 
 		return (
-			<canvas ref={canvasRef} width="100%" height="auto" {...props}></canvas>
+			<canvas
+				ref={canvasRef}
+				aria-hidden={props["aria-hidden"] ?? true}
+				width="100%"
+				height="auto"
+				{...props}
+			/>
 		);
 	},
 );
+
+WavesComponent.displayName = "Waves";
+
+export const Waves = memo(WavesComponent);
