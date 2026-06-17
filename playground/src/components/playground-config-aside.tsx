@@ -2,10 +2,8 @@ import { Settings2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 import { playgroundPresetOptions, type PlaygroundPreset } from "../presets";
-import { playgroundPropDescriptions } from "../prop-descriptions";
 import { ConfigPanel, type ConfigPanelProps } from "./config-panel";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
 import {
 	Select,
 	SelectContent,
@@ -86,11 +84,7 @@ export function PlaygroundConfigAside(props: Readonly<ConfigPanelProps>) {
 						</SelectTrigger>
 						<SelectContent>
 							{playgroundPresetOptions.map((option) => (
-								<SelectItem
-									key={option.value}
-									value={option.value}
-									description={option.description}
-								>
+								<SelectItem key={option.value} value={option.value}>
 									{option.name}
 								</SelectItem>
 							))}
