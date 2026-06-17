@@ -99,7 +99,7 @@ function VoiceWaveform() {
     <Waves
       amplitude={40}
       intensity={intensity}
-      smoothing={0.2}
+      smoothing={0.8}
       speed={1.3}
       colors={["#436EDB", "#8B5CF6"]}
       height={180}
@@ -132,7 +132,7 @@ The `Waves` component accepts the following props:
 | `colors` | The colors for the waveform. Accepts any CSS color string (e.g., `#436EDB`, `rgb(67, 110, 219)`, `#436EDB80`). | `['#436EDB']` |
 | `amplitude` | Maximum height of the waveform in pixels. | `20` |
 | `speed` | Speed of the waveform animation. | `1` |
-| `smoothing` | Smoothing factor while approaching the target amplitude. | `0.1` |
+| `smoothing` | How gradually amplitude approaches its target; higher values change more slowly. | `0.9` |
 | `frequency` | Sine wave frequency of the waveform. | `1` |
 | `waveCount` | Number of primary wave layers. | `3` |
 | `lineCount` | Number of secondary mesh lines. | `30` |

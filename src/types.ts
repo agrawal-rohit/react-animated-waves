@@ -25,7 +25,7 @@ export type WavesProps = Omit<
 	amplitude?: number;
 	/** Speed of the waveform animation. */
 	speed?: number;
-	/** Smoothing factor while approaching the target amplitude. */
+	/** How gradually amplitude approaches its target; higher values change more slowly. */
 	smoothing?: number;
 	/** Sine wave frequency of the waveform. */
 	frequency?: number;

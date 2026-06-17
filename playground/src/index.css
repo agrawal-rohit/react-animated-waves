@@ -1,10 +1,89 @@
 @import "tailwindcss";
 
-/* Theme configuration */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
-  --font-sans: "Geist Sans", system-ui, sans-serif;
+	/* Typography */
+	--font-sans: "Geist Variable", system-ui, sans-serif;
+	--text-2xs: 0.7rem;
+	--text-2xs-line-height: calc(1 / 0.7);
+	--text-xs: 0.775rem;
+	--text-xs-line-height: calc(1 / 0.775);
+	--text-base: 0.925rem;
+	--text-base-line-height: calc(1.5 / 0.95);
+	--text-lg: 1rem;
+	--text-lg-line-height: calc(1.75 / 1.1);
+
+	/* Custom Palette */
+	--color-primary: #000f96;
+	--color-destructive: #ef4444;
+	--color-warning: #fe9900;
+	--color-success: #00bd7d;
+	--color-info: #3b82f6;
+
+	/* Neutral Colors */
+	--color-neutral-30: #fafbfc;
+	--color-neutral-50: #f8fafc;
+	--color-neutral-70: #f3f5f7;
+	--color-neutral-100: #f1f5f9;
+	--color-neutral-200: #e2e8f0;
+	--color-neutral-300: #cbd5e1;
+	--color-neutral-400: #94a3b8;
+	--color-neutral-500: #64748b;
+	--color-neutral-600: #475569;
+	--color-neutral-700: #334155;
+	--color-neutral-800: #1e293b;
+	--color-neutral-900: #0f172a;
+
+	/* Surface Colors */
+	--color-background: #ffffff;
+	--color-accent: var(--color-neutral-100);
+	--color-secondary: var(--color-neutral-100);
+	--color-muted: var(--color-neutral-100);
+	--color-popover: #ffffff;
+	--color-border: var(--color-neutral-200);
+	--color-ring: var(--color-neutral-500);
+	--color-input: var(--color-neutral-300);
+
+	/* Text Colors */
+	--color-foreground: var(--color-neutral-800);
+	--color-primary-foreground: #ffffff;
+	--color-secondary-foreground: var(--color-neutral-900);
+	--color-accent-foreground: var(--color-neutral-900);
+	--color-muted-foreground: var(--color-neutral-600);
+	--color-popover-foreground: var(--color-neutral-900);
+	--color-destructive-foreground: #ffffff;
 }
 
-:root {
-    @apply bg-white text-zinc-600 tracking-tight antialiased dark:bg-zinc-900 dark:text-zinc-300 font-normal leading-relaxed;
+.dark {
+	--color-primary: #4d6bff;
+	--color-destructive: #f87171;
+
+	--color-background: var(--color-neutral-900);
+	--color-accent: var(--color-neutral-800);
+	--color-secondary: var(--color-neutral-800);
+	--color-muted: var(--color-neutral-800);
+	--color-popover: var(--color-neutral-900);
+	--color-border: var(--color-neutral-700);
+	--color-ring: var(--color-neutral-500);
+	--color-input: var(--color-neutral-700);
+
+	--color-foreground: var(--color-neutral-100);
+	--color-primary-foreground: #ffffff;
+	--color-secondary-foreground: var(--color-neutral-100);
+	--color-accent-foreground: var(--color-neutral-100);
+	--color-muted-foreground: var(--color-neutral-400);
+	--color-popover-foreground: var(--color-neutral-100);
+	--color-destructive-foreground: #ffffff;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	@apply bg-background font-sans text-foreground antialiased;
 }

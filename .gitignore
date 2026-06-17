@@ -17,3 +17,11 @@ coverage/
 # Stryker mutation testing files
 .stryker-tmp
 reports/
+
+# Agent instructions
+.cursor/
+.windsurf/
+.cline/
+.claude/
+AGENTS.md
+AGENT.md

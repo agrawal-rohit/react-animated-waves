@@ -13,7 +13,7 @@ describe("resolveWaveConfig", () => {
 			speed: 0.001,
 			meshCount: 30,
 		});
-		expect(config.smoothing).toBe(0.1);
+		expect(config.smoothing).toBe(0.9);
 		expect(config.pinch).toBe(6);
 		expect(config.amplitudeOscillation).toBe(0.05);
 	});

@@ -4,7 +4,7 @@ import type { WaveLayer, WavesProps } from "./types";
 export const DEFAULT_COLORS = ["#436EDB"];
 export const DEFAULT_AMPLITUDE = 20;
 const BASE_TIME_SCALE = 0.0015;
-const BASE_SMOOTHING = 0.1;
+const BASE_SMOOTHING = 0.9;
 const BASE_FREQUENCY = 1;
 const BASE_LINE_COUNT = 30;
 const BASE_WAVE_COUNT = 3;
@@ -126,7 +126,7 @@ const generateLayers = (
 /**
  * Normalize public props into renderer-ready animation settings.
  * @param speed - The speed of the waveform animation.
- * @param smoothing - The smoothing factor while approaching the target amplitude.
+ * @param smoothing - How gradually amplitude approaches its target; higher values change more slowly.
  * @param frequency - The sine wave frequency of the waveform.
  * @param waveCount - The number of waves to generate.
  * @param lineCount - The number of lines to draw.

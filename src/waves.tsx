@@ -140,9 +140,10 @@ const WavesComponent = forwardRef<HTMLCanvasElement, WavesProps>(
 				const timestamp = Date.now();
 				const time = timestamp * waveConfig.timeScale;
 
-				// Smoothly approach the latest target amplitude from props/intensity.
+				// Higher smoothing slows the approach; lower values snap to the target faster.
+				const amplitudeLerpFactor = 1 - waveConfig.smoothing;
 				amplitudeRef.current +=
-					waveConfig.smoothing *
+					amplitudeLerpFactor *
 					(targetAmplitudeRef.current - amplitudeRef.current);
 
 				// Calculate the oscillating amplitude based on the time and the amplitude oscillation configuration.
