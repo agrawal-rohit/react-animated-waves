@@ -45,7 +45,7 @@
 		}
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.16",
+		"@biomejs/biome": "2.5.0",
 		"@fontsource-variable/geist": "^5.2.8",
 		"@tailwindcss/vite": "^4.3.0",
 		"@commitlint/cli": "^21.0.2",
@@ -78,7 +78,7 @@
 		"happy-dom": "^20.10.2",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.7",
-		"lucide-react": "^1.17.0",
+		"lucide-react": "^1.18.0",
 		"react-color": "^2.19.3",
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.0",
