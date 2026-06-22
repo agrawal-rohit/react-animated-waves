@@ -22,18 +22,18 @@
 	--color-info: #3b82f6;
 
 	/* Neutral Colors */
-	--color-neutral-30: #fafbfc;
-	--color-neutral-50: #f8fafc;
-	--color-neutral-70: #f3f5f7;
-	--color-neutral-100: #f1f5f9;
-	--color-neutral-200: #e2e8f0;
-	--color-neutral-300: #cbd5e1;
-	--color-neutral-400: #94a3b8;
-	--color-neutral-500: #64748b;
-	--color-neutral-600: #475569;
-	--color-neutral-700: #334155;
-	--color-neutral-800: #1e293b;
-	--color-neutral-900: #0f172a;
+	--color-neutral-30: #fcfcfc;
+	--color-neutral-50: #fafafa;
+	--color-neutral-70: #f6f6f7;
+	--color-neutral-100: #f4f4f5;
+	--color-neutral-200: #e4e4e7;
+	--color-neutral-300: #d4d4d8;
+	--color-neutral-400: #a1a1aa;
+	--color-neutral-500: #71717a;
+	--color-neutral-600: #52525b;
+	--color-neutral-700: #3f3f46;
+	--color-neutral-800: #27272a;
+	--color-neutral-900: #18181b;
 
 	/* Surface Colors */
 	--color-background: #ffffff;
