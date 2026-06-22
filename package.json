@@ -23,6 +23,7 @@
 		"test-mutations": "stryker run",
 		"playground": "vite --config playground/vite.config.ts",
 		"playground:build": "vite build --config playground/vite.config.ts",
+		"playground:deploy": "npx wrangler deploy",
 		"cov": "vitest run --coverage --passWithNoTests",
 		"prepare": "husky",
 		"typecheck": "tsc --noEmit",
