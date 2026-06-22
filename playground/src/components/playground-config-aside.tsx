@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 import { playgroundPresetOptions, type PlaygroundPreset } from "../presets";
 import { ConfigPanel, type ConfigPanelProps } from "./config-panel";
+import { CopyJsxButton } from "./copy-jsx-button";
 import { Button } from "./ui/button";
 import {
 	Select,
@@ -90,6 +91,7 @@ export function PlaygroundConfigAside(props: Readonly<ConfigPanelProps>) {
 							))}
 						</SelectContent>
 					</Select>
+					<CopyJsxButton {...props} />
 				</div>
 				<ConfigPanel {...props} />
 			</aside>
