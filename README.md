@@ -154,4 +154,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to report issu
 
 [MIT](LICENSE) © [Rohit Agrawal](https://github.com/agrawal-rohit)
 
-[demo]: https://codesandbox.io/p/sandbox/react-animated-waves-example-6z9hlh
+[demo]: https://react-animated-waves.rohit-agrawal.com/
