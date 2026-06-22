@@ -22,6 +22,7 @@
 		"test": "vitest",
 		"test-mutations": "stryker run",
 		"playground": "vite --config playground/vite.config.ts",
+		"playground:build": "vite build --config playground/vite.config.ts",
 		"cov": "vitest run --coverage --passWithNoTests",
 		"prepare": "husky",
 		"typecheck": "tsc --noEmit",
