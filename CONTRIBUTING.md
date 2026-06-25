@@ -83,50 +83,30 @@ Small documentation fixes (typos, clarifications) are always welcome!
 
 ## Release Process
 
-This project uses a simple tag-driven release workflow powered by [npm trusted publishing](https://docs.npmjs.com/trusted-publishers). Push a tag, and [Github Actions](https://github.com/features/actions) handles the rest.
-
-### How It Works
-
-All development happens on `main`. When you're ready to release, just push a semver tag. The tag format determines what gets published:
+This project uses a simple tag-driven release workflow powered by [npm trusted publishing](https://docs.npmjs.com/trusted-publishers). Majority of the release process is automated using [Github Actions](https://github.com/features/actions) which gets triggered when a new semver tag is pushed. The tag format determines what gets published:
 
 - **Stable releases** (`v1.2.3`) → Published to npm with the `latest` tag
-- **Release candidates** (`v1.2.3-rc.1`) → Published with the `rc` tag  
-- **Beta releases** (`v1.2.3-beta.1`) → Published with the `beta` tag
-- **Alpha releases** (`v1.2.3-alpha.1`) → Published with the `alpha` tag
+  ```bash
+  git checkout main
+  git pull origin main
+  git tag v1.2.3
+  git push origin v1.2.3
+  ```
+- **Pre-release/Release candidates** (`v1.2.3-rc.1`, `v1.2.3-beta.1`, `v1.2.3-alpha.1`) → Published with the `rc`, `beta`, or `alpha` tags
+  ```bash
+  git tag v1.2.3-rc.1    # or -beta.1, -alpha.1
+  git push origin v1.2.3-rc.1
+  ```
 
-### Creating a Release
-
-Ensure `main` is ready, then push a tag:
-
-**For a stable release:**
-```bash
-git checkout main
-git pull origin main
-git tag v1.2.3
-git push origin v1.2.3
-```
-
-**For a pre-release (RC, beta, or alpha):**
-```bash
-git tag v1.2.3-rc.1    # or -beta.1, -alpha.1
-git push origin v1.2.3-rc.1
-```
-
-### What Happens Automatically
-
-When you push a tag, the release workflow kicks in and:
+When the tag is pushed, the [Github Actions](https://github.com/features/actions) workflow performs the following steps:
 
 1. Installs dependencies and builds the package
 2. Publishes to npm with the appropriate tag (`latest`, `rc`, `beta`, or `alpha`)
 3. Creates a GitHub Release with a changelog generated from the conventional commits using [git-cliff](https://git-cliff.org/)
 4. Opens a pull request with the updated package version back into the `main` branch.
 
-### Things to Remember
-
-- Keep `package.json` version at `0.0.0` in the repo — never bump it manually
-- Don't commit version changes — CI handles that during release
-- Tag format matters: `v1.2.3` for stable, `v1.2.3-rc.1` for pre-releases
-- [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) must be configured on npmjs.com (see repository settings for details)
+> [!IMPORTANT]
+> [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) must be configured on npmjs.com (see repository settings for details)
 
 ## Dependencies
 
