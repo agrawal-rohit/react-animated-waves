@@ -83,6 +83,12 @@ Small documentation fixes (typos, clarifications) are always welcome!
 
 ## Release Process
 
+### Overview
+
+> [!IMPORTANT]
+> - [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) must be configured
+> - Ensure that `"Allow GitHub Actions to create and approve pull requests"` is checked in your repository settings *(Settings > Actions > General > Workflow permissions)*
+
 This project uses a simple tag-driven release workflow powered by [npm trusted publishing](https://docs.npmjs.com/trusted-publishers). Majority of the release process is automated using [Github Actions](https://github.com/features/actions) which gets triggered when a new semver tag is pushed. The tag format determines what gets published:
 
 - **Stable releases** (`v1.2.3`) → Published to npm with the `latest` tag
@@ -105,8 +111,24 @@ When the tag is pushed, the [Github Actions](https://github.com/features/actions
 3. Creates a GitHub Release with a changelog generated from the conventional commits using [git-cliff](https://git-cliff.org/)
 4. Opens a pull request with the updated package version back into the `main` branch.
 
-> [!IMPORTANT]
-> [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) must be configured on npmjs.com (see repository settings for details)
+### Testing Pre-releases
+
+After pushing a pre-release tag, you can test it before cutting a stable release:
+
+```bash
+npm install my-package@1.2.3-rc.1
+```
+
+Found a bug? Fix it on `main` and push a new pre-release tag (e.g., `v1.2.3-rc.2`). Rinse and repeat until it's ready to be rolled out as a stable release.
+
+### Promoting to Stable
+
+Once a pre-release has been tested and you're confident it's ready:
+
+```bash
+git tag v1.2.3
+git push origin v1.2.3
+```
 
 ## Dependencies
 
@@ -124,11 +146,10 @@ When the tag is pushed, the [Github Actions](https://github.com/features/actions
 
 Some guidelines for maintainers:
 
-- Use pull requests for all changes to `main`
+- Changes to `main` should be added through pull requests
 - Tag format must adhere to semver standards: `vX.Y.Z` for stable releases and `vX.Y.Z-rc.N`, `-beta.N`, `-alpha.N` for pre-releases
-- Only push release tags when ready — tags trigger the full release pipeline
 - Keep required checks and branch protection enabled on `main` branch
-- Avoid modifying automation without discussion:
+- Avoid modifying config files in the repository without discussion:
   - Configuration files (`cliff.toml`, `biome.json`, etc.)
   - CI workflows (`.github/workflows/*`)
   - Release tooling
