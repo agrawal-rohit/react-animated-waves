@@ -87,3 +87,20 @@ body,
 body {
 	@apply bg-background font-sans text-foreground antialiased;
 }
+
+/* Make interactive controls discoverable without changing disabled states. */
+button:not(:disabled),
+select:not(:disabled),
+a[href],
+label[for],
+summary,
+[role="button"]:not([aria-disabled="true"]),
+[role="checkbox"]:not([aria-disabled="true"]),
+[role="menuitem"]:not([aria-disabled="true"]),
+[role="option"]:not([aria-disabled="true"]),
+[role="radio"]:not([aria-disabled="true"]),
+[role="slider"]:not([aria-disabled="true"]),
+[role="switch"]:not([aria-disabled="true"]),
+[role="tab"]:not([aria-disabled="true"]) {
+	cursor: pointer;
+}
