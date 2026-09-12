@@ -11,7 +11,7 @@ function Label({ className, description, children, ...props }: Readonly<LabelPro
 	const label = (
 		<LabelPrimitive.Root
 			className={cn(
-				"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+				"cursor-pointer text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 				className,
 			)}
 			{...props}

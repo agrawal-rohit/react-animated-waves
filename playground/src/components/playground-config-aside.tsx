@@ -42,7 +42,7 @@ export function PlaygroundConfigAside(props: Readonly<ConfigPanelProps>) {
 			{open && (
 				<button
 					type="button"
-					className="fixed inset-0 z-40 bg-black/50 md:hidden"
+					className="fixed inset-0 z-40 cursor-pointer bg-black/50 md:hidden"
 					aria-label="Close configuration"
 					onClick={() => setOpen(false)}
 				/>
