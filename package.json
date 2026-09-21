@@ -33,7 +33,7 @@
 		"check:ci": "pnpm run typecheck && pnpm exec biome check"
 	},
 	"dependencies": {
-		"@ctrl/tinycolor": "^4.2.0"
+		"@ctrl/tinycolor": "^4.2.1"
 	},
 	"peerDependencies": {
 		"react": "^19.1.0",
